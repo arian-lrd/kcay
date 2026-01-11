@@ -1,0 +1,720 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #850a0a;
+  
+  --card-bg: #f8f8f8;           /* Card/box background color - change this to customize card backgrounds */
+  
+  --nav-bg: #661c1c;            /* Deep Teal/Green */
+  --nav-text: #FFFFFF;          /* White */
+  --nav-hover: #40E0D0;         /* Turquoise (cultural significance) */
+  --nav-active: #0e342c;        /* Kurdish Yellow/Gold */
+  --nav-border: #144D42;        /* Dark Teal border */
+  --nav-mobile-bg: #144D42;     /* Dark teal mobile menu */
+  
+  /* Social Media Icon Colors - Individual control! */
+  --icon-instagram: #43111a;     /* Instagram icon color */
+  --icon-youtube: #FF0000;       /* YouTube icon color */
+  --icon-linkedin: #0077B5;       /* LinkedIn icon color */
+  --icon-linktree: #43E55E;      /* Linktree icon color */
+  
+  /* Executive Team Card Colors - About Page */
+  --executive-name-color: #ffffff;  /* Executive name text color */
+  --executive-role-color: #661c1c;  /* Executive role text color */
+
+  /* Executive Card Divider Line (About Page) */
+  --executive-divider-width: 8rem;     /* line width (e.g. 4rem, 6rem, 8rem) */
+  --executive-divider-height: 2.5px;     /* line thickness (e.g. 1px, 2px, 4px) */
+  --executive-divider-radius: 1999px;   /* border-radius for rounded ends */
+  --executive-divider-color: #661c1c;  /* line color (default matches nav-bg) */
+
+  /* Podcast Detail Page Theme */
+  --podcast-hero-grid-dot: rgba(255, 255, 255, 0.25);         /* small dots on hero image */
+  --podcast-hero-grid-opacity: 0.20;                          /* overall grid overlay opacity */
+
+  --podcast-halo-top: rgba(145, 32, 32, 0.35);                /* top halo color behind content */
+  --podcast-halo-bottom: rgba(145, 32, 32, 0.25);             /* bottom halo color behind content */
+
+  --podcast-header-gradient-start: rgba(145, 32, 32, 0.10);   /* header card gradient start */
+  --podcast-header-gradient-end: rgba(0, 0, 0, 0.0);          /* header card gradient end */
+
+  --podcast-back-button-bg: rgba(0, 0, 0, 0.45);
+  --podcast-back-button-border: rgba(255, 255, 255, 0.16);
+  --podcast-back-button-text: #ffffff;
+
+  --podcast-badge-bg: rgba(0, 0, 0, 0.40);
+  --podcast-badge-text: rgba(255, 255, 255, 0.75);
+
+  --podcast-accent-line-start: var(--nav-bg);                 /* under-title accent line start color */
+
+  --podcast-youtube-frame-border: rgba(0, 0, 0, 0.25);
+
+  --podcast-audio-bg: rgba(0, 0, 0, 0.35);
+
+  --podcast-youtube-button-gradient-start: #7f0e0e;
+  --podcast-youtube-button-gradient-end: #c62a0b;
+  --podcast-youtube-button-shadow: rgba(250, 250, 250, 0.213);
+
+  --podcast-tabs-pill-bg: rgba(0, 0, 0, 0.25);
+  --podcast-tab-active-bg: var(--nav-bg);
+  --podcast-tab-active-text: var(--nav-text);
+  --podcast-tab-inactive-text: var(--foreground);
+
+  /* Podcast Header Card (first card - title, YouTube, Spotify) */
+  --podcast-header-card-bg: linear-gradient(135deg, var(--podcast-header-gradient-start), var(--podcast-header-gradient-end));
+  --podcast-header-card-border: var(--nav-border);
+
+  /* Podcast Tabs Card (second card - Show Notes/Transcript) */
+  --podcast-tabs-card-gradient-start: rgba(145, 32, 32, 0.10);
+  --podcast-tabs-card-gradient-end: rgba(0, 0, 0, 0.0);
+  --podcast-tabs-card-bg: linear-gradient(135deg, var(--podcast-tabs-card-gradient-start), var(--podcast-tabs-card-gradient-end));
+  --podcast-tabs-card-border: var(--nav-border);
+
+  /* Show Notes/Transcript Sub-items */
+  --podcast-description-heading-color: var(--foreground);
+  --podcast-description-text-color: var(--foreground);
+  
+  --podcast-timestamps-heading-color: var(--foreground);
+  --podcast-timestamps-heading-opacity: 0.70;
+  
+  --podcast-timestamp-button-bg: var(--background);
+  --podcast-timestamp-button-border: var(--nav-border);
+  --podcast-timestamp-button-text: var(--foreground);
+  --podcast-timestamp-button-hover-scale: 1.02;
+  
+  --podcast-timestamp-badge-bg: var(--nav-bg);
+  --podcast-timestamp-badge-text: var(--nav-text);
+  
+  --podcast-show-notes-heading-color: var(--foreground);
+  --podcast-show-notes-text-color: var(--foreground);
+  
+  --podcast-transcript-lang-button-active-bg: var(--nav-bg);
+  --podcast-transcript-lang-button-active-text: var(--nav-text);
+  --podcast-transcript-lang-button-active-border: var(--nav-bg);
+  --podcast-transcript-lang-button-inactive-bg: var(--background);
+  --podcast-transcript-lang-button-inactive-text: var(--foreground);
+  --podcast-transcript-lang-button-inactive-border: var(--nav-border);
+  
+  --podcast-transcript-text-bg: var(--background);
+  --podcast-transcript-text-color: var(--foreground);
+
+  /* Podcast Main Page - Top Section */
+  --podcast-page-top-bg: var(--card-bg);  /* Slightly lighter than background */
+
+  /* Podcast Sidebar - Recent Episodes */
+  --podcast-sidebar-heading-color: var(--foreground);
+  --podcast-sidebar-heading-size: 1.125rem; /* text-lg */
+  --podcast-sidebar-heading-margin-bottom: 1rem; /* mb-4 */
+  
+  --podcast-sidebar-episode-gap: 0.75rem; /* space-y-3 */
+  --podcast-sidebar-episode-padding: 0.75rem; /* p-3 */
+  --podcast-sidebar-episode-bg: var(--background);
+  --podcast-sidebar-episode-border: var(--podcast-timestamp-button-border);
+  --podcast-sidebar-episode-text: var(--podcast-timestamp-button-text);
+  --podcast-sidebar-episode-active-bg: var(--podcast-timestamp-button-bg);
+  --podcast-sidebar-episode-active-border: var(--podcast-timestamp-button-border);
+  --podcast-sidebar-episode-active-text: var(--podcast-timestamp-button-text);
+  --podcast-sidebar-episode-text-size: 0.875rem; /* text-sm */
+  --podcast-sidebar-episode-text-weight: 600; /* font-semibold */
+  --podcast-sidebar-episode-hover-scale: 1.02;
+  
+  --podcast-sidebar-divider-color: var(--nav-border);
+  --podcast-sidebar-see-all-color: var(--nav-bg);
+
+  /* Podcast Main Page - Recent Episodes Section */
+  --podcast-page-view-all-link-color: var(--nav-bg);
+  --podcast-page-listen-episode-text-color: var(--nav-bg);
+  --podcast-page-view-all-button-bg: var(--nav-bg);
+  --podcast-page-view-all-button-text: var(--nav-text);
+  
+  /* Podcast Main Page - Sidebar */
+  --podcast-page-newsletter-container-bg: var(--podcast-tabs-card-bg);
+  --podcast-page-listen-on-container-bg: var(--podcast-tabs-card-bg);
+  --podcast-page-subscribe-button-bg: var(--nav-bg);
+  --podcast-page-subscribe-button-text: var(--nav-text);
+
+  /* Events Page - Hero Section */  /*50% 20% — Custom position (horizontal %, vertical %) 
+  --events-hero-bg-image: url('/images/events-hero.jpg'); /* Set this to your background image URL, e.g., url('/images/events-hero.jpg') */
+  --events-hero-bg-size: cover;
+  --events-hero-bg-position: center 25%; /* Horizontal center, vertical position. Adjust %: 0% = exact top, 10% = near top, 25% = quarter down, 50% = middle, 75% = three-quarters down */
+  --events-hero-bg-opacity: 0.2;
+  --events-hero-padding-top: 10rem; /* Adjust vertical padding - top (5rem = 80px, 6rem = 96px, 8rem = 128px) */
+  --events-hero-padding-bottom: 6rem; /* Adjust vertical padding - bottom */
+  --events-hero-min-height: 600px; /* THIS controls the image height! Increase this to make hero taller: 500px, 600px, 700px, 800px, or use viewport height: 50vh, 60vh, 70vh, 80vh */
+  --events-hero-overlay-color: rgba(0, 0, 0, 0.4);
+  --events-hero-pattern: radial-gradient(circle at 20% 50%, rgba(145, 32, 32, 0.15) 0%, transparent 50%),
+                          radial-gradient(circle at 80% 80%, rgba(145, 32, 32, 0.15) 0%, transparent 50%);
+  --events-hero-pattern-opacity: 0.3;
+  --events-hero-title-color: var(--foreground);
+  --events-hero-subtitle-color: var(--foreground);
+  
+  /* Events Page - General */
+  --events-section-divider: var(--nav-border);
+  
+  --events-card-bg: var(--podcast-tabs-card-bg);
+  --events-card-border: var(--podcast-tabs-card-border);
+  
+  --events-image-placeholder-bg: var(--background);
+  
+  --events-date-badge-bg: rgba(0, 0, 0, 0.5);
+  --events-date-badge-text: rgba(255, 255, 255, 0.9);
+  
+  --events-title-color: var(--foreground);
+  --events-description-color: var(--foreground);
+  --events-location-color: var(--foreground);
+  --events-view-details-color: var(--nav-bg);
+
+  /* Learn Page - Hero Section */
+  --learn-hero-bg-image: url('/images/kurd-paper.jpg'); /* Background image for learn page hero */
+  --learn-hero-bg-size: 120%; /* Less zoomed in - increase for more zoom (150%, 200%), decrease for less zoom (100%, 80%), or use 'contain' to show full image */
+  --learn-hero-bg-position: center center;
+  --learn-hero-bg-opacity: 0.3;
+  --learn-hero-padding-top: 5rem;
+  --learn-hero-padding-bottom: 5rem;
+  --learn-hero-min-height: auto;
+  --learn-hero-overlay-color: rgba(0, 0, 0, 0.4);
+  --learn-hero-pattern: radial-gradient(circle at 20% 50%, rgba(145, 32, 32, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(145, 32, 32, 0.15) 0%, transparent 50%);
+  --learn-hero-pattern-opacity: 0.2;
+  --learn-hero-title-color: var(--foreground);
+  --learn-hero-subtitle-color: var(--foreground);
+
+  /* Learn Page - Cards */
+  --learn-card-bg: var(--podcast-tabs-card-bg);
+  --learn-card-border: var(--podcast-tabs-card-border);
+  --learn-card-icon-bg: var(--nav-bg);
+  --learn-card-icon-text: var(--foreground);
+  --learn-card-title-color: var(--foreground);
+  --learn-card-text-color: var(--foreground);
+  --learn-card-link-color: var(--nav-bg);
+
+  /* Learn Sub-Pages (kurdish-language, kurdish-dance, kurdish-heritage) */
+  --learn-subpage-title-color: var(--foreground);
+  --learn-subpage-description-color: var(--foreground);
+
+  /* Resources Page - Hero Section */
+  --resources-hero-bg-image: none; /* Set this to your background image URL, e.g., url('/images/resources-hero.jpg') */
+  --resources-hero-bg-size: cover;
+  --resources-hero-bg-position: center center;
+  --resources-hero-bg-opacity: 0.3;
+  --resources-hero-padding-top: 5rem;
+  --resources-hero-padding-bottom: 5rem;
+  --resources-hero-min-height: auto;
+  --resources-hero-overlay-color: rgba(0, 0, 0, 0.4);
+  --resources-hero-pattern: radial-gradient(circle at 20% 50%, rgba(145, 32, 32, 0.15) 0%, transparent 50%),
+                            radial-gradient(circle at 80% 80%, rgba(145, 32, 32, 0.15) 0%, transparent 50%);
+  --resources-hero-pattern-opacity: 0.2;
+  --resources-hero-title-color: var(--foreground);
+  --resources-hero-subtitle-color: var(--foreground);
+
+  /* Resources Page - Sections */
+  --resources-section-divider: var(--nav-border);
+
+  /* Resources Page - Constitution Card */
+  --resources-constitution-card-bg: var(--podcast-tabs-card-bg);
+  --resources-constitution-card-border: var(--podcast-tabs-card-border);
+  --resources-constitution-icon-bg: var(--nav-bg);
+  --resources-constitution-icon-text: var(--nav-text);
+  --resources-constitution-title-color: var(--foreground);
+  --resources-constitution-text-color: var(--foreground);
+  --resources-constitution-button-bg: var(--nav-bg);
+  --resources-constitution-button-text: var(--nav-text);
+  --resources-constitution-button-border: var(--nav-border);
+
+  /* Resources Page - Gallery */
+  --resources-gallery-card-bg: var(--podcast-tabs-card-bg);
+  --resources-gallery-card-border: var(--podcast-tabs-card-border);
+  --resources-gallery-image-placeholder-bg: var(--background);
+  --resources-gallery-text-color: var(--foreground);
+  --resources-gallery-title-color: var(--foreground);
+  --resources-gallery-date-color: var(--foreground);
+  --resources-gallery-back-button-bg: var(--nav-bg);
+  --resources-gallery-back-button-text: var(--nav-text);
+  --resources-gallery-back-button-border: var(--nav-border);
+  --resources-gallery-overlay-bg: rgba(0, 0, 0, 0.75);
+  --resources-gallery-overlay-text-color: white;
+
+  /* Notable Figures Page - Hero Section */
+  --notable-figures-hero-bg-image: none; /* Set this to your background image URL, e.g., url('/images/notable-figures-hero.jpg') */
+  --notable-figures-hero-bg-size: cover;
+  --notable-figures-hero-bg-position: center center;
+  --notable-figures-hero-bg-opacity: 0.3;
+  --notable-figures-hero-padding-top: 5rem;
+  --notable-figures-hero-padding-bottom: 5rem;
+  --notable-figures-hero-min-height: auto;
+  --notable-figures-hero-overlay-color: rgba(0, 0, 0, 0.4);
+  --notable-figures-hero-pattern: radial-gradient(circle at 20% 50%, rgba(145, 32, 32, 0.15) 0%, transparent 50%),
+                                  radial-gradient(circle at 80% 80%, rgba(145, 32, 32, 0.15) 0%, transparent 50%);
+  --notable-figures-hero-pattern-opacity: 0.2;
+  --notable-figures-hero-title-color: var(--foreground);
+  --notable-figures-hero-subtitle-color: var(--foreground);
+
+  /* Notable Figures Page - Cards */
+  --notable-figures-card-bg: var(--podcast-tabs-card-bg);
+  --notable-figures-card-border: var(--podcast-tabs-card-border);
+  --notable-figures-image-placeholder-bg: var(--background);
+  --notable-figures-name-color: var(--foreground);
+  --notable-figures-name-overlay-color: #ffffff;
+  --notable-figures-century-color: var(--foreground);
+  --notable-figures-area-color: var(--foreground);
+  --notable-figures-location-color: var(--foreground);
+  --notable-figures-text-color: var(--foreground);
+  --notable-figures-link-color: var(--nav-bg);
+  --notable-figures-link-divider-color: var(--nav-border);
+
+  /* Notable Figure Detail Page - Hero Section */
+  --notable-figure-detail-back-button-bg: rgba(0, 0, 0, 0.5);
+  --notable-figure-detail-back-button-border: rgba(255, 255, 255, 0.2);
+  --notable-figure-detail-back-button-text: #ffffff;
+  --notable-figure-detail-badge-bg: rgba(0, 0, 0, 0.4);
+  --notable-figure-detail-badge-border: rgba(255, 255, 255, 0.2);
+
+  /* Notable Figure Detail Page - Content Sections */
+  --notable-figure-detail-essay-card-bg: var(--podcast-tabs-card-bg);
+  --notable-figure-detail-essay-card-border: var(--podcast-tabs-card-border);
+  --notable-figure-detail-heading-color: var(--foreground);
+  --notable-figure-detail-essay-text-color: var(--foreground);
+  --notable-figure-detail-divider-color: var(--nav-border);
+  --notable-figure-detail-info-card-bg: var(--podcast-tabs-card-bg);
+  --notable-figure-detail-info-card-border: var(--podcast-tabs-card-border);
+  --notable-figure-detail-info-heading-color: var(--foreground);
+  --notable-figure-detail-info-text-color: var(--foreground);
+  --notable-figure-detail-icon-bg: var(--nav-bg);
+  --notable-figure-detail-icon-text: var(--nav-text);
+  --notable-figure-detail-associated-card-bg: var(--podcast-tabs-card-bg);
+  --notable-figure-detail-associated-card-border: var(--podcast-tabs-card-border);
+  --notable-figure-detail-associated-name-color: var(--foreground);
+  --notable-figure-detail-associated-text-color: var(--foreground);
+  --notable-figure-detail-associated-link-color: var(--nav-bg);
+  --notable-figure-detail-associated-link-divider-color: var(--nav-border);
+
+  /* Notable Figure Detail Page - Navigation */
+  --notable-figure-detail-nav-bg: transparent;
+  --notable-figure-detail-nav-divider-color: var(--nav-border);
+  --notable-figure-detail-nav-button-bg: var(--nav-bg);
+  --notable-figure-detail-nav-button-text: var(--nav-text);
+  --notable-figure-detail-nav-button-border: var(--nav-border);
+  --notable-figure-detail-nav-secondary-bg: transparent;
+  --notable-figure-detail-nav-secondary-text: var(--foreground);
+  --notable-figure-detail-nav-secondary-border: var(--nav-border);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0e342c;
+    --foreground: #ffffff;
+    --card-bg: #661c1c;         /* Slightly lighter than background for cards in dark mode */
+    --executive-name-color: #ffffff;   /* Keep white for names in dark mode */
+    --executive-role-color: #cdcaca;   /* Light grey for roles in dark mode for better contrast */
+    --executive-divider-color: #ffffff; /* Make divider line white in dark mode */
+
+    /* Podcast Detail Page Theme - Dark Mode Tweaks */
+    --podcast-hero-grid-dot: rgba(255, 255, 255, 0.18);
+    --podcast-hero-grid-opacity: 0.18;
+
+    --podcast-halo-top: rgba(255, 255, 255, 0.10);
+    --podcast-halo-bottom: rgba(255, 255, 255, 0.06);
+
+    --podcast-header-gradient-start: rgba(255, 255, 255, 0.08);
+    --podcast-header-gradient-end: rgba(0, 0, 0, 0.0);
+
+    --podcast-back-button-bg: rgba(0, 0, 0, 0.55);
+    --podcast-back-button-border: rgba(255, 255, 255, 0.24);
+    --podcast-back-button-text: #ffffff;
+
+    --podcast-badge-bg: rgba(0, 0, 0, 0.50);
+    --podcast-badge-text: rgba(255, 255, 255, 0.80);
+
+    --podcast-accent-line-start: #ffffff;
+
+    --podcast-youtube-frame-border: rgba(0, 0, 0, 0.4);
+
+    --podcast-audio-bg: rgba(0, 0, 0, 0.55);
+
+    --podcast-tabs-pill-bg: rgba(0, 0, 0, 0.45);
+    --podcast-tab-active-bg: var(--nav-bg);
+    --podcast-tab-active-text: var(--nav-text);
+    --podcast-tab-inactive-text: var(--foreground);
+
+    /* Podcast Header Card - Dark Mode */
+    --podcast-header-card-bg: linear-gradient(135deg, var(--podcast-header-gradient-start), var(--podcast-header-gradient-end));
+    --podcast-header-card-border: var(--nav-border);
+
+    /* Podcast Tabs Card - Dark Mode */
+    --podcast-tabs-card-gradient-start: rgba(255, 255, 255, 0.08);
+    --podcast-tabs-card-gradient-end: rgba(0, 0, 0, 0.0);
+    --podcast-tabs-card-bg: linear-gradient(135deg, var(--podcast-tabs-card-gradient-start), var(--podcast-tabs-card-gradient-end));
+    --podcast-tabs-card-border: var(--nav-border);
+
+    /* Show Notes/Transcript Sub-items - Dark Mode */
+    --podcast-description-heading-color: var(--foreground);
+    --podcast-description-text-color: var(--foreground);
+    
+    --podcast-timestamps-heading-color: var(--foreground);
+    --podcast-timestamps-heading-opacity: 0.70;
+    
+    --podcast-timestamp-button-bg: #100f0f;
+    --podcast-timestamp-button-border: var(--nav-border);
+    --podcast-timestamp-button-text: var(--foreground);
+    
+    --podcast-timestamp-badge-bg: var(--nav-bg);
+    --podcast-timestamp-badge-text: var(--nav-text);
+    
+    --podcast-show-notes-heading-color: var(--foreground);
+    --podcast-show-notes-text-color: var(--foreground);
+    
+    --podcast-transcript-lang-button-active-bg: var(--nav-bg);
+    --podcast-transcript-lang-button-active-text: var(--nav-text);
+    --podcast-transcript-lang-button-active-border: var(--nav-bg);
+    --podcast-transcript-lang-button-inactive-bg: var(--background);
+    --podcast-transcript-lang-button-inactive-text: var(--foreground);
+    --podcast-transcript-lang-button-inactive-border: var(--nav-border);
+    
+    --podcast-transcript-text-bg: var(--background);
+    --podcast-transcript-text-color: var(--foreground);
+
+    /* Podcast Main Page - Top Section - Dark Mode */
+    --podcast-page-top-bg: #095746;  /* Slightly lighter than background in dark mode */
+
+    /* Podcast Sidebar - Recent Episodes - Dark Mode */
+    --podcast-sidebar-heading-color: var(--foreground);
+    --podcast-sidebar-heading-size: 1.125rem;
+    --podcast-sidebar-heading-margin-bottom: 1rem;
+    
+    --podcast-sidebar-episode-gap: 0.75rem;
+    --podcast-sidebar-episode-padding: 0.75rem;
+    --podcast-sidebar-episode-bg: var(--background);
+    --podcast-sidebar-episode-border: var(--podcast-timestamp-button-border);
+    --podcast-sidebar-episode-text: var(--podcast-timestamp-button-text);
+    --podcast-sidebar-episode-active-bg: var(--podcast-timestamp-button-bg);
+    --podcast-sidebar-episode-active-border: var(--podcast-timestamp-button-border);
+    --podcast-sidebar-episode-active-text: var(--podcast-timestamp-button-text);
+    --podcast-sidebar-episode-text-size: 0.875rem;
+    --podcast-sidebar-episode-text-weight: 600;
+    --podcast-sidebar-episode-hover-scale: 1.02;
+    
+    --podcast-sidebar-divider-color: var(--nav-border);
+    --podcast-sidebar-see-all-color: #dfdfdf;
+
+    /* Podcast Main Page - Recent Episodes Section - Dark Mode */
+    --podcast-page-view-all-link-color: #ffffff;
+    --podcast-page-listen-episode-text-color: #ffe600;
+    --podcast-page-view-all-button-bg: var(--nav-bg);
+    --podcast-page-view-all-button-text: var(--nav-text);
+    
+    /* Podcast Main Page - Sidebar - Dark Mode */
+    --podcast-page-newsletter-container-bg: var(--podcast-tabs-card-bg);
+    --podcast-page-listen-on-container-bg: var(--podcast-tabs-card-bg);
+    --podcast-page-subscribe-button-bg: var(--nav-bg);
+    --podcast-page-subscribe-button-text: var(--nav-text);
+
+    /* Events Page - Hero Section - Dark Mode */
+    --events-hero-bg-image: url('/images/events-hero.jpg'); /* Set to same as light mode, or change to none or a different image */
+    --events-hero-bg-size: cover;
+    --events-hero-bg-position: center 0%; /* Horizontal center, vertical position. Adjust %: 0% = exact top, 10% = near top, 25% = quarter down, 50% = middle, 75% = three-quarters down */
+    --events-hero-bg-opacity: 0.25;
+    --events-hero-padding-top: 5rem; /* Adjust vertical padding - top */
+    --events-hero-padding-bottom: 5rem; /* Adjust vertical padding - bottom */
+    --events-hero-min-height: 400px; /* Set minimum height - this controls the actual image height! Use: 400px, 500px, 600px, 700px, 800px, or viewport units like 50vh, 60vh, 70vh, 80vh */
+    --events-hero-overlay-color: rgba(0, 0, 0, 0.5);
+    --events-hero-pattern: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                            radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    --events-hero-pattern-opacity: 0.4;
+    --events-hero-title-color: var(--foreground);
+    --events-hero-subtitle-color: var(--foreground);
+    
+    /* Events Page - General - Dark Mode */
+    --events-section-divider: var(--nav-border);
+    
+    --events-card-bg: var(--podcast-tabs-card-bg);
+    --events-card-border: var(--podcast-tabs-card-border);
+    
+    --events-image-placeholder-bg: var(--background);
+    
+    --events-date-badge-bg: rgba(0, 0, 0, 0.6);
+    --events-date-badge-text: rgba(255, 255, 255, 0.95);
+    
+    --events-title-color: var(--foreground);
+    --events-description-color: var(--foreground);
+    --events-location-color: var(--foreground);
+    --events-view-details-color: var(--nav-bg);
+
+    /* Events Detail Page - Hero Section */
+    --event-detail-hero-min-height: 70vh;
+    --event-detail-hero-max-height: 800px;
+    --event-detail-hero-bg-position: center center; /* Adjust: center top, center 30%, etc. */
+    --event-detail-hero-gradient-start: rgba(0, 0, 0, 0.3);
+    --event-detail-hero-gradient-mid: rgba(0, 0, 0, 0.5);
+    --event-detail-hero-gradient-end: rgba(0, 0, 0, 0.8);
+    --event-detail-hero-pattern: radial-gradient(circle at 20% 50%, rgba(145, 32, 32, 0.2) 0%, transparent 50%);
+    --event-detail-hero-title-color: #ffffff;
+    
+    --event-detail-back-button-bg: rgba(0, 0, 0, 0.5);
+    --event-detail-back-button-border: rgba(255, 255, 255, 0.2);
+    --event-detail-back-button-text: #ffffff;
+    
+    --event-detail-date-badge-bg: rgba(0, 0, 0, 0.5);
+    --event-detail-date-badge-border: rgba(255, 255, 255, 0.2);
+    --event-detail-date-badge-text: #ffffff;
+    
+    --event-detail-location-badge-bg: rgba(0, 0, 0, 0.4);
+    --event-detail-location-badge-border: rgba(255, 255, 255, 0.2);
+    --event-detail-location-badge-text: #ffffff;
+    
+    --event-detail-past-badge-bg: rgba(255, 255, 255, 0.15);
+    --event-detail-past-badge-border: rgba(255, 255, 255, 0.2);
+    --event-detail-past-badge-text: #ffffff;
+
+    /* Events Detail Page - Content Sections */
+    --event-detail-description-card-bg: var(--podcast-tabs-card-bg);
+    --event-detail-description-card-border: var(--podcast-tabs-card-border);
+    --event-detail-description-heading-color: var(--foreground);
+    --event-detail-description-text-color: var(--foreground);
+    --event-detail-description-divider-color: var(--nav-border);
+    
+    --event-detail-info-card-bg: var(--podcast-tabs-card-bg);
+    --event-detail-info-card-border: var(--podcast-tabs-card-border);
+    --event-detail-info-card-heading-color: var(--foreground);
+    --event-detail-info-card-text-color: var(--foreground);
+    --event-detail-icon-bg: var(--nav-bg);
+    --event-detail-icon-text: var(--nav-text);
+    
+    --event-detail-cta-card-bg: linear-gradient(135deg, var(--nav-bg) 0%, rgba(145, 32, 32, 0.9) 100%);
+    --event-detail-cta-card-border: var(--nav-border);
+    --event-detail-cta-text: var(--nav-text);
+    --event-detail-cta-heading-color: var(--nav-text);
+    --event-detail-cta-button-bg: #ffffff;
+    --event-detail-cta-button-text: #1a1a1a;
+    
+    --event-detail-nav-bg: transparent;
+    --event-detail-nav-divider-color: var(--nav-border);
+    --event-detail-nav-button-bg: var(--nav-bg);
+    --event-detail-nav-button-text: var(--nav-text);
+    --event-detail-nav-button-border: var(--nav-border);
+    --event-detail-nav-secondary-bg: transparent;
+    --event-detail-nav-secondary-text: var(--foreground);
+    --event-detail-nav-secondary-border: var(--nav-border);
+
+    /* Learn Page - Hero Section - Dark Mode */
+    --learn-hero-bg-image: url('/images/kurd-paper.jpg'); /* Background image for learn page hero */
+    --learn-hero-bg-size: 100%; /* Less zoomed in - increase for more zoom (150%, 200%), decrease for less zoom (100%, 80%), or use 'contain' to show full image */
+    --learn-hero-bg-position: center right;
+    --learn-hero-bg-opacity: 0.25;
+    --learn-hero-padding-top: 10rem;
+    --learn-hero-padding-bottom: 5rem;
+    --learn-hero-min-height: 400px;
+    --learn-hero-overlay-color: rgba(0, 0, 0, 0.5);
+    --learn-hero-pattern: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                          radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    --learn-hero-pattern-opacity: 0.3;
+    --learn-hero-title-color: var(--foreground);
+    --learn-hero-subtitle-color: var(--foreground);
+
+    /* Learn Page - Cards - Dark Mode */
+    --learn-card-bg: var(--podcast-tabs-card-bg);
+    --learn-card-border: var(--podcast-tabs-card-border);
+    --learn-card-icon-bg: var(--nav-bg);
+    --learn-card-icon-text: var(--foreground);
+    --learn-card-title-color: var(--foreground);
+    --learn-card-text-color: var(--foreground);
+    --learn-card-link-color: var(--nav-bg);
+
+    /* Learn Sub-Pages (kurdish-language, kurdish-dance, kurdish-heritage) - Dark Mode */
+    --learn-subpage-title-color: var(--foreground);
+    --learn-subpage-description-color: var(--foreground);
+
+    /* Resources Page - Hero Section - Dark Mode */
+    --resources-hero-bg-image: none; /* Set this to your background image URL, e.g., url('/images/resources-hero.jpg') */
+    --resources-hero-bg-size: cover;
+    --resources-hero-bg-position: center center;
+    --resources-hero-bg-opacity: 0.25;
+    --resources-hero-padding-top: 5rem;
+    --resources-hero-padding-bottom: 5rem;
+    --resources-hero-min-height: auto;
+    --resources-hero-overlay-color: rgba(0, 0, 0, 0.5);
+    --resources-hero-pattern: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    --resources-hero-pattern-opacity: 0.3;
+    --resources-hero-title-color: var(--foreground);
+    --resources-hero-subtitle-color: var(--foreground);
+
+    /* Resources Page - Sections - Dark Mode */
+    --resources-section-divider: var(--nav-border);
+
+    /* Resources Page - Constitution Card - Dark Mode */
+    --resources-constitution-card-bg: var(--podcast-tabs-card-bg);
+    --resources-constitution-card-border: var(--podcast-tabs-card-border);
+    --resources-constitution-icon-bg: var(--nav-bg);
+    --resources-constitution-icon-text: var(--nav-text);
+    --resources-constitution-title-color: var(--foreground);
+    --resources-constitution-text-color: var(--foreground);
+    --resources-constitution-button-bg: var(--nav-bg);
+    --resources-constitution-button-text: var(--nav-text);
+    --resources-constitution-button-border: var(--nav-border);
+
+    /* Resources Page - Gallery - Dark Mode */
+    --resources-gallery-card-bg: var(--podcast-tabs-card-bg);
+    --resources-gallery-card-border: var(--podcast-tabs-card-border);
+    --resources-gallery-image-placeholder-bg: var(--background);
+    --resources-gallery-text-color: var(--foreground);
+    --resources-gallery-title-color: var(--foreground);
+    --resources-gallery-date-color: var(--foreground);
+    --resources-gallery-back-button-bg: var(--nav-bg);
+    --resources-gallery-back-button-text: var(--nav-text);
+    --resources-gallery-back-button-border: var(--nav-border);
+    --resources-gallery-overlay-bg: rgba(0, 0, 0, 0.75);
+    --resources-gallery-overlay-text-color: white;
+
+    /* Notable Figures Page - Hero Section - Dark Mode */
+    --notable-figures-hero-bg-image: none; /* Set this to your background image URL, e.g., url('/images/notable-figures-hero.jpg') */
+    --notable-figures-hero-bg-size: cover;
+    --notable-figures-hero-bg-position: center center;
+    --notable-figures-hero-bg-opacity: 0.25;
+    --notable-figures-hero-padding-top: 5rem;
+    --notable-figures-hero-padding-bottom: 5rem;
+    --notable-figures-hero-min-height: auto;
+    --notable-figures-hero-overlay-color: rgba(0, 0, 0, 0.5);
+    --notable-figures-hero-pattern: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                                    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    --notable-figures-hero-pattern-opacity: 0.3;
+    --notable-figures-hero-title-color: var(--foreground);
+    --notable-figures-hero-subtitle-color: var(--foreground);
+
+    /* Notable Figures Page - Cards - Dark Mode */
+    --notable-figures-card-bg: var(--podcast-tabs-card-bg);
+    --notable-figures-card-border: var(--podcast-tabs-card-border);
+    --notable-figures-image-placeholder-bg: var(--background);
+    --notable-figures-image-object-position: center top; /* Controls where the image is focused (e.g., "center top" to show head, "center center" for center) */
+    --notable-figures-image-object-fit: cover; /* Controls how image fills container: cover, contain, fill, etc. */
+    --notable-figures-image-object-position: center top; /* Controls where the image is focused (e.g., "center top" to show head, "center center" for center) */
+    --notable-figures-image-object-fit: cover; /* Controls how image fills container: cover, contain, fill, etc. */
+    --notable-figures-name-color: var(--foreground);
+    --notable-figures-name-overlay-color: #ffffff;
+    --notable-figures-century-color: var(--foreground);
+    --notable-figures-area-color: var(--foreground);
+    --notable-figures-location-color: var(--foreground);
+    --notable-figures-text-color: var(--foreground);
+    --notable-figures-link-color: var(--nav-bg);
+    --notable-figures-link-divider-color: var(--nav-border);
+
+    /* Notable Figure Detail Page - Hero Section - Dark Mode */
+    --notable-figure-detail-back-button-bg: rgba(0, 0, 0, 0.6);
+    --notable-figure-detail-back-button-border: rgba(255, 255, 255, 0.25);
+    --notable-figure-detail-back-button-text: #ffffff;
+    --notable-figure-detail-badge-bg: rgba(0, 0, 0, 0.5);
+    --notable-figure-detail-badge-border: rgba(255, 255, 255, 0.25);
+
+    /* Notable Figure Detail Page - Content Sections - Dark Mode */
+    --notable-figure-detail-essay-card-bg: var(--podcast-tabs-card-bg);
+    --notable-figure-detail-essay-card-border: var(--podcast-tabs-card-border);
+    --notable-figure-detail-heading-color: var(--foreground);
+    --notable-figure-detail-essay-text-color: var(--foreground);
+    --notable-figure-detail-divider-color: var(--nav-border);
+    --notable-figure-detail-info-card-bg: var(--podcast-tabs-card-bg);
+    --notable-figure-detail-info-card-border: var(--podcast-tabs-card-border);
+    --notable-figure-detail-info-heading-color: var(--foreground);
+    --notable-figure-detail-info-text-color: var(--foreground);
+    --notable-figure-detail-icon-bg: var(--nav-bg);
+    --notable-figure-detail-icon-text: var(--nav-text);
+    --notable-figure-detail-associated-card-bg: var(--podcast-tabs-card-bg);
+    --notable-figure-detail-associated-card-border: var(--podcast-tabs-card-border);
+    --notable-figure-detail-associated-name-color: var(--foreground);
+    --notable-figure-detail-associated-text-color: var(--foreground);
+    --notable-figure-detail-associated-link-color: var(--nav-bg);
+    --notable-figure-detail-associated-link-divider-color: var(--nav-border);
+
+    /* Notable Figure Detail Page - Navigation - Dark Mode */
+    --notable-figure-detail-nav-bg: transparent;
+    --notable-figure-detail-nav-divider-color: var(--nav-border);
+    --notable-figure-detail-nav-button-bg: var(--nav-bg);
+    --notable-figure-detail-nav-button-text: var(--nav-text);
+    --notable-figure-detail-nav-button-border: var(--nav-border);
+    --notable-figure-detail-nav-secondary-bg: transparent;
+    --notable-figure-detail-nav-secondary-text: var(--foreground);
+    --notable-figure-detail-nav-secondary-border: var(--nav-border);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Kurdish font support */
+.kurdish-text {
+  font-family: var(--font-kurdish), 'Noto Sans Arabic', 'Arial Unicode MS', Arial, sans-serif;
+  direction: rtl; /* Right-to-left for Arabic script */
+}
+
+/* Custom Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nav-bg);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nav-active);
+}

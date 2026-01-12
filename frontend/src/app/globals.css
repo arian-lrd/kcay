@@ -300,6 +300,73 @@
   --notable-figure-detail-nav-secondary-bg: transparent;
   --notable-figure-detail-nav-secondary-text: var(--foreground);
   --notable-figure-detail-nav-secondary-border: var(--nav-border);
+
+  /* ============================================================================
+     GET INVOLVED PAGE STYLING
+     ============================================================================ */
+
+  /* Get Involved Page - Hero Section */
+  --get-involved-hero-bg-image: url('/images/get-involved-hero.jpg'); /* Set this to your background image URL, e.g., url('/images/get-involved-hero.jpg') */
+  --get-involved-hero-bg-size: cover;
+  --get-involved-hero-bg-position: right 35%; /* Horizontal center, vertical position. Adjust %: 0% = exact top, 10% = near top, 25% = quarter down, 50% = middle, 75% = three-quarters down */
+  --get-involved-hero-bg-opacity: 0.2;
+  --get-involved-hero-padding-top: 10rem; /* Adjust vertical padding - top (5rem = 80px, 6rem = 96px, 8rem = 128px, 10rem = 160px) */
+  --get-involved-hero-padding-bottom: 6rem; /* Adjust vertical padding - bottom */
+  --get-involved-hero-min-height: 400px; /* THIS controls the image height! Increase this to make hero taller: 400px, 500px, 600px, 700px, or use viewport height: 50vh, 60vh, 70vh */
+  --get-involved-hero-overlay-color: rgba(0, 0, 0, 0.4);
+  --get-involved-hero-pattern: radial-gradient(circle at 20% 50%, rgba(145, 32, 32, 0.15) 0%, transparent 50%),
+                                radial-gradient(circle at 80% 80%, rgba(145, 32, 32, 0.15) 0%, transparent 50%);
+  --get-involved-hero-pattern-opacity: 0.3;
+  --get-involved-hero-title-color: var(--foreground);
+  --get-involved-hero-subtitle-color: var(--foreground);
+
+  /* Get Involved Page - Sections */
+  --get-involved-section-divider: var(--nav-border);
+  --get-involved-section-title-color: var(--foreground);
+  --get-involved-section-text-color: var(--foreground);
+
+  /* Get Involved Page - Cards */
+  --get-involved-card-bg: #0d4d3f;
+  --get-involved-card-border: var(--podcast-tabs-card-border);
+  --get-involved-card-hover-bg: var(--podcast-tabs-card-hover-bg);
+  --get-involved-card-title-color: var(--foreground);
+  --get-involved-card-text-color: var(--foreground);
+
+  /* Get Involved Page - Buttons */
+  --get-involved-button-general-member-bg: #771919; /* Blue */
+  --get-involved-button-general-member-text: #ffffff;
+  --get-involved-button-general-member-hover-bg: rgba(59, 130, 246, 1);
+  --get-involved-button-sponsor-bg: #771919; /* Green */
+  --get-involved-button-sponsor-text: #ffffff;
+  --get-involved-button-sponsor-hover-bg: rgba(34, 197, 94, 1);
+  --get-involved-button-executive-bg: #661c1c; /* Purple */
+  --get-involved-button-executive-text: #ffffff;
+  --get-involved-button-executive-hover-bg: rgba(168, 85, 247, 1);
+  --get-involved-button-view-details-bg: #771919; /* Gray */
+  --get-involved-button-view-details-text: #ffffff;
+  --get-involved-button-view-details-hover-bg: rgba(107, 114, 128, 1);
+
+  /* Get Involved Page - Position Cards */
+  --get-involved-position-card-bg: var(--get-involved-card-bg);
+  --get-involved-position-card-border: var(--get-involved-card-border);
+  --get-involved-position-card-title-color: var(--foreground);
+  --get-involved-position-card-text-color: var(--foreground);
+
+  /* Get Involved Page - Modal */
+  --get-involved-modal-overlay-bg: rgba(0, 0, 0, 0.6);
+  --get-involved-modal-bg: #0e342c;
+  --get-involved-modal-border: var(--nav-border);
+  --get-involved-modal-title-color: var(--foreground);
+  --get-involved-modal-text-color: var(--foreground);
+  --get-involved-modal-close-color: var(--foreground);
+  --get-involved-modal-close-hover-color: rgba(239, 68, 68, 1);
+
+  /* Get Involved Page - Contact Section */
+  --get-involved-contact-bg: var(--get-involved-card-bg);
+  --get-involved-contact-border: var(--get-involved-card-border);
+  --get-involved-contact-text-color: var(--foreground);
+  --get-involved-contact-link-color: rgba(59, 130, 246, 1);
+  --get-involved-contact-link-hover-color: rgba(37, 99, 235, 1);
 }
 
 @media (prefers-color-scheme: dark) {

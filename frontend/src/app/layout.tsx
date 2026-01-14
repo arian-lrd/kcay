@@ -25,6 +25,38 @@ const notoSansArabic = Noto_Sans_Arabic({
 export const metadata: Metadata = {
   title: "KCAY - Kurdish Cultural Association at York",
   description: "Welcome to the Kurdish Cultural Association at York. Celebrating Kurdish culture, heritage, and community through events, podcasts, and educational resources.",
+  keywords: ["Kurdish", "Kurdish culture", "York University", "Kurdish community", "Kurdish events", "Kurdish podcast", "Kurdish heritage", "Kurdish language", "Kurdish dance"],
+  authors: [{ name: "KCAY" }],
+  creator: "Kurdish Cultural Association at York",
+  publisher: "Kurdish Cultural Association at York",
+  metadataBase: new URL('https://kcay.ca'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "KCAY - Kurdish Cultural Association at York",
+    description: "Welcome to the Kurdish Cultural Association at York. Celebrating Kurdish culture, heritage, and community through events, podcasts, and educational resources.",
+    url: "https://kcay.ca",
+    siteName: "KCAY",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "KCAY - Kurdish Cultural Association at York",
+    description: "Welcome to the Kurdish Cultural Association at York. Celebrating Kurdish culture, heritage, and community.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

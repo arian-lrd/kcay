@@ -40,11 +40,20 @@ export const metadata: Metadata = {
     siteName: "KCAY",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "https://kcay.ca/og/kcay-og.png",
+        width: 1200,
+        height: 630,
+        alt: "KCAY - Kurdish Cultural Association at York",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "KCAY - Kurdish Cultural Association at York",
     description: "Welcome to the Kurdish Cultural Association at York. Celebrating Kurdish culture, heritage, and community.",
+    images: ["https://kcay.ca/og/kcay-og.png"],
   },
   robots: {
     index: true,

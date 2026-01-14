@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description: "Welcome to the Kurdish Cultural Association at York. Celebrating Kurdish culture, heritage, and community through events, podcasts, and educational resources.",
   keywords: ["Kurdish", "Kurdish culture", "York University", "Kurdish community", "Kurdish events", "Kurdish podcast", "Kurdish heritage", "Kurdish language", "Kurdish dance"],
   authors: [{ name: "KCAY" }],
-  creator: "Kurdish Cultural Association at York",
+  creator: "Arian Amiri ",
   publisher: "Kurdish Cultural Association at York",
   metadataBase: new URL('https://kcay.ca'),
   alternates: {

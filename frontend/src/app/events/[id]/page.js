@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { getEventById } from '@/lib/api';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
+import { getEventById, getEventImages } from '@/lib/api';
 
 // Backend base URL for images
 const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:3000';
@@ -17,6 +19,12 @@ export default function EventDetailPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [mounted, setMounted] = useState(false);
+  const [eventImages, setEventImages] = useState(null);
+  const [eventImagesLoading, setEventImagesLoading] = useState(false);
+  const [eventImagesError, setEventImagesError] = useState(null);
+  const [imageErrors, setImageErrors] = useState({});
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -35,6 +43,35 @@ export default function EventDetailPage() {
     }
     fetchEvent();
   }, [eventId]);
+
+  // Fetch event images when event is loaded
+  useEffect(() => {
+    if (!event || !event.title) return;
+
+    async function fetchImages() {
+      setEventImagesLoading(true);
+      setEventImagesError(null);
+      try {
+        // Convert event title to folder name: "First Executive Meeting" -> "First-Executive-Meeting"
+        const folderName = event.title.replace(/\s+/g, '-');
+        const images = await getEventImages(folderName);
+        setEventImages(images);
+      } catch (err) {
+        console.error('Error fetching event images:', err);
+        setEventImagesError(err.message || 'Failed to load event images.');
+      } finally {
+        setEventImagesLoading(false);
+      }
+    }
+
+    fetchImages();
+  }, [event]);
+
+  // Functions to handle lightbox
+  const openLightbox = (index) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
 
   if (loading) {
     return (
@@ -329,6 +366,120 @@ export default function EventDetailPage() {
                 </div>
               )}
             </div>
+
+            {/* Event Images Section */}
+            {eventImagesLoading && (
+              <div className="flex items-center justify-center py-16 mb-10">
+                <div className="text-center">
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-current mb-4" style={{ color: 'var(--foreground)' }}></div>
+                  <p style={{ color: 'var(--foreground)' }}>Loading event photos...</p>
+                </div>
+              </div>
+            )}
+
+            {eventImagesError && (
+              <div className="mb-10 p-6 rounded-2xl border" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--event-detail-info-card-border)' }}>
+                <p className="text-red-600 text-center">Unable to load event photos: {eventImagesError}</p>
+              </div>
+            )}
+
+            {eventImages && eventImages.length > 0 && !eventImagesLoading && (
+              <div className="mb-10">
+                <div className="flex items-center gap-4 mb-6">
+                  <h3 
+                    className="text-2xl sm:text-3xl font-bold"
+                    style={{ color: 'var(--event-detail-info-card-heading-color, var(--foreground))' }}
+                  >
+                    Event Photos
+                  </h3>
+                  <div className="flex-1 h-px" style={{ backgroundColor: 'var(--event-detail-info-card-border, var(--podcast-tabs-card-border))' }}></div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                  {eventImages.map((item, index) => {
+                    const imageUrl = item.image_url 
+                      ? (item.image_url.startsWith('http') ? item.image_url : `${BACKEND_BASE_URL}${item.image_url}`)
+                      : null;
+                    const hasImageError = imageErrors[item.id];
+
+                    return (
+                      <div
+                        key={item.id}
+                        className="group relative"
+                        style={{
+                          transform: mounted ? 'translateY(0)' : 'translateY(20px)',
+                          opacity: mounted ? 1 : 0,
+                          transition: `all 0.6s ease-out ${0.2 + (index % 6) * 0.1}s`
+                        }}
+                      >
+                        <div 
+                          className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border aspect-[16/9]"
+                          style={{
+                            backgroundColor: 'var(--event-detail-info-card-bg, var(--podcast-tabs-card-bg))',
+                            borderColor: 'var(--event-detail-info-card-border, var(--podcast-tabs-card-border))'
+                          }}
+                        >
+                          <div 
+                            className="relative w-full h-full overflow-hidden"
+                            style={{ backgroundColor: 'var(--event-detail-info-card-bg, var(--podcast-tabs-card-bg))' }}
+                          >
+                            {imageUrl && !hasImageError ? (
+                              <>
+                                <img 
+                                  src={imageUrl} 
+                                  alt={item.description || `Event photo ${index + 1}`}
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                  onClick={() => openLightbox(index)}
+                                  onError={() => {
+                                    if (!imageErrors[item.id]) {
+                                      setImageErrors(prev => ({ ...prev, [item.id]: true }));
+                                    }
+                                  }}
+                                />
+                                {item.description && (
+                                  <div 
+                                    className="absolute inset-x-0 bottom-0 bg-black bg-opacity-75 text-white p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+                                  >
+                                    <p className="text-sm leading-relaxed">
+                                      {item.description}
+                                    </p>
+                                  </div>
+                                )}
+                              </>
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <div className="text-center p-4">
+                                  <svg className="w-16 h-16 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--foreground)' }}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                  </svg>
+                                  <p className="text-sm opacity-50" style={{ color: 'var(--foreground)' }}>No Image</p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* YARL Lightbox */}
+            {eventImages && eventImages.length > 0 && (
+              <Lightbox
+                open={lightboxOpen}
+                close={() => setLightboxOpen(false)}
+                index={lightboxIndex}
+                slides={eventImages.map((image) => ({
+                  src: image.image_url 
+                    ? (image.image_url.startsWith('http') ? image.image_url : `${BACKEND_BASE_URL}${image.image_url}`)
+                    : '',
+                  alt: image.description || 'Event photo',
+                  description: image.description || undefined,
+                }))}
+                on={{ view: ({ index }) => setLightboxIndex(index) }}
+              />
+            )}
 
             {/* Call to Action */}
             {!isPastEvent && (

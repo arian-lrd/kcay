@@ -2,6 +2,8 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 import { getGallery, getConstitution, getEventImages } from '@/lib/api';
 
 // Backend base URL for images
@@ -24,6 +26,8 @@ function ResourcesPageContent() {
   const [eventImages, setEventImages] = useState(null); // All images from selected event
   const [eventImagesLoading, setEventImagesLoading] = useState(false);
   const [eventImagesError, setEventImagesError] = useState(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
   
   // Sync selectedEvent with URL parameter
   useEffect(() => {
@@ -227,7 +231,7 @@ function ResourcesPageContent() {
                     Download our organization's constitution document
                   </p>
                   <a 
-                    href={`${BACKEND_BASE_URL}${constitution}`} 
+                    href={`${BACKEND_BASE_URL}${constitution?.file_path || constitution}`} 
             target="_blank" 
             rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 px-8 py-4 rounded-xl font-bold text-lg transition-all hover:scale-105 shadow-lg border"
@@ -445,7 +449,11 @@ function ResourcesPageContent() {
                               <img 
                                 src={imageUrl} 
                                 alt={item.description || 'Event image'}
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-pointer"
+                                onClick={() => {
+                                  setLightboxIndex(index);
+                                  setLightboxOpen(true);
+                                }}
                                 onError={() => {
                                   if (!imageErrors[item.id]) {
                                     setImageErrors(prev => ({ ...prev, [item.id]: true }));
@@ -503,6 +511,23 @@ function ResourcesPageContent() {
                   Back to Gallery
                 </button>
           </div>
+            )}
+
+            {/* YARL Lightbox for Gallery Images */}
+            {eventImages && eventImages.length > 0 && (
+              <Lightbox
+                open={lightboxOpen}
+                close={() => setLightboxOpen(false)}
+                index={lightboxIndex}
+                slides={eventImages.map((image) => ({
+                  src: image.image_url 
+                    ? (image.image_url.startsWith('http') ? image.image_url : `${BACKEND_BASE_URL}${image.image_url}`)
+                    : '',
+                  alt: image.description || 'Event image',
+                  description: image.description || undefined,
+                }))}
+                on={{ view: ({ index }) => setLightboxIndex(index) }}
+              />
             )}
         </section>
       )}

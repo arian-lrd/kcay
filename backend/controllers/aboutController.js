@@ -1,8 +1,8 @@
 const aboutModel = require('../models/aboutModel');
 
 /* ----- reusable data functions ----- */
-const fetchAboutParagraph = async () => {
-  return await aboutModel.getAboutParagraph();
+const fetchAboutParagraph = async (contentType = 'about_us_summary') => {
+  return await aboutModel.getAboutParagraph(contentType);
 }
 
 const fetchAboutExecutives = async () => {
@@ -31,9 +31,11 @@ const getAboutExecutives = async (req, res, next) => {
 
 const getAboutPage = async (req, res, next) => {
     try {
-      console.log('Fetching about page data...');
+      // Get content type from query parameter, default to 'about_us_full' for about page
+      const contentType = req.query.content || 'about_us_full';
+      console.log('Fetching about page data...', contentType);
       const [paragraph, executives] = await Promise.all([
-        fetchAboutParagraph(),
+        fetchAboutParagraph(contentType),
         fetchAboutExecutives()
       ]);
   

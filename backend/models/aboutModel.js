@@ -1,8 +1,11 @@
 const db = require('../config/database');
 
-async function getAboutParagraph() {
-    // the following line will only show the latest entry in the about_page table
-    const [rows] = await db.promise.query('SELECT paragraph FROM about_page ORDER BY updated_at DESC LIMIT 1');
+async function getAboutParagraph(contentType = 'about_us_summary') {
+    // Filter by content type: 'about_us_summary' for homepage, 'about_us_full' for about page
+    const [rows] = await db.promise.query(
+        'SELECT paragraph FROM about_page WHERE content = ? ORDER BY updated_at DESC LIMIT 1',
+        [contentType]
+    );
     return [rows[0]?.paragraph || ""]; // return the paragraph or an empty string if no paragraph is found
 }
 

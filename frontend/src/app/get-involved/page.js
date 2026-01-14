@@ -17,10 +17,12 @@ export default function GetInvolvedPage() {
   useEffect(() => {
     async function fetchData() {
       try {
+        console.log('🔍 Fetching get-involved data...');
         const involvedData = await getGetInvolved();
+        console.log('✅ Received get-involved data:', involvedData);
         setData(involvedData);
       } catch (err) {
-        console.error('Error fetching get-involved data:', err);
+        console.error('❌ Error fetching get-involved data:', err);
         setError(err.message || 'Failed to load get-involved data. Please make sure the backend server is running on port 3000.');
       } finally {
         setLoading(false);

@@ -9,11 +9,11 @@ import { getAbout, getEvents, getLatestPodcast, subscribeToNewsletter } from '@/
 const BACKEND_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace('/api/v1', '') || 'http://localhost:3000';
 
 export default function Home() {
-  const [aboutData, setAboutData] = useState(null);
-  const [eventsData, setEventsData] = useState(null);
-  const [podcastData, setPodcastData] = useState(null);
+  const [aboutData, setAboutData] = useState<any>(null);
+  const [eventsData, setEventsData] = useState<any>(null);
+  const [podcastData, setPodcastData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   
   // Newsletter form state
@@ -29,7 +29,7 @@ export default function Home() {
     async function fetchData() {
       try {
         const [about, events, podcast] = await Promise.all([
-          getAbout().catch(() => null),
+          getAbout('about_us_summary').catch(() => null),
           getEvents().catch(() => null),
           getLatestPodcast().catch(() => null),
         ]);
@@ -37,7 +37,7 @@ export default function Home() {
         setEventsData(events);
         setPodcastData(podcast);
       } catch (err) {
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'An unknown error occurred');
       } finally {
         setLoading(false);
       }
@@ -45,7 +45,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleNewsletterSubmit = async (e) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setNewsletterSubmitting(true);
     setNewsletterError('');
@@ -62,7 +62,7 @@ export default function Home() {
       setNewsletterFirstName('');
       setNewsletterLastName('');
     } catch (err) {
-      setNewsletterError(err.message || 'Failed to subscribe. Please try again.');
+      setNewsletterError(err instanceof Error ? err.message : 'Failed to subscribe. Please try again.');
     } finally {
       setNewsletterSubmitting(false);
     }
@@ -120,7 +120,7 @@ export default function Home() {
           <div className="text-center transform transition-all duration-1000" style={{ opacity: mounted ? 1 : 0, transform: mounted ? 'translateY(0)' : 'translateY(20px)' }}>
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl animate-fade-in">
               Welcome to KCAY
-            </h1>
+          </h1>
             <div className="w-24 h-1 bg-white/80 mx-auto mb-8 rounded-full"></div>
             <p className="text-xl sm:text-2xl md:text-3xl max-w-4xl mx-auto leading-relaxed mb-10 text-white/95 font-light">
               {welcomeText}
@@ -250,8 +250,8 @@ export default function Home() {
                 </h3>
                 <p className="text-base opacity-80 mb-6 leading-relaxed" style={{ color: 'var(--foreground)' }}>
                   Meet Kurdish leaders, artists, thinkers, and visionaries who shaped our history and culture.
-                </p>
-              </div>
+          </p>
+        </div>
               <span className="inline-flex items-center text-sm font-semibold mt-4 relative z-10 group-hover:translate-x-2 transition-transform duration-300" style={{ color: 'var(--nav-bg)' }}>
                 Browse the gallery
                 <span className="ml-2 text-lg">→</span>
@@ -296,8 +296,8 @@ export default function Home() {
                 {podcastData?.spotify_url && (
                   <a
                     href={podcastData.spotify_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+            target="_blank"
+            rel="noopener noreferrer"
                     className="px-5 py-2.5 rounded-full text-sm font-semibold border transition-all hover:scale-105 hover:bg-white/10"
                     style={{ borderColor: 'var(--nav-bg)', color: 'var(--foreground)' }}
                   >
@@ -331,7 +331,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {upcomingEvents.slice(0, 3).map((event) => {
+              {upcomingEvents.slice(0, 3).map((event: any) => {
                 const eventDate = new Date(event.event_date);
                 const formattedDate = eventDate.toLocaleDateString('en-US', { 
                   month: 'long', 
@@ -356,8 +356,9 @@ export default function Home() {
                           src={imageUrl}
                           alt={event.title}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
+                          onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
                           }}
                         />
                         <div className="absolute bottom-4 left-4 right-4 z-20">
@@ -423,7 +424,7 @@ export default function Home() {
                 type="text"
                 placeholder="First Name"
                 value={newsletterFirstName}
-                onChange={(e) => setNewsletterFirstName(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewsletterFirstName(e.target.value)}
                 required
                 className="px-5 py-4 rounded-xl border-0 text-gray-900 focus:outline-none focus:ring-4 focus:ring-white/50 transition-all shadow-lg"
               />
@@ -431,7 +432,7 @@ export default function Home() {
                 type="text"
                 placeholder="Last Name"
                 value={newsletterLastName}
-                onChange={(e) => setNewsletterLastName(e.target.value)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewsletterLastName(e.target.value)}
                 required
                 className="px-5 py-4 rounded-xl border-0 text-gray-900 focus:outline-none focus:ring-4 focus:ring-white/50 transition-all shadow-lg"
               />
@@ -440,7 +441,7 @@ export default function Home() {
               type="email"
               placeholder="Email Address"
               value={newsletterEmail}
-              onChange={(e) => setNewsletterEmail(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setNewsletterEmail(e.target.value)}
               required
               className="w-full px-5 py-4 rounded-xl border-0 text-gray-900 focus:outline-none focus:ring-4 focus:ring-white/50 transition-all shadow-lg"
             />
@@ -458,7 +459,7 @@ export default function Home() {
               type="submit"
               disabled={newsletterSubmitting}
               className="w-full sm:w-auto px-10 py-4 rounded-xl font-bold text-lg bg-white text-gray-900 hover:scale-105 hover:shadow-2xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transform"
-            >
+          >
               {newsletterSubmitting ? (
                 <span className="flex items-center justify-center gap-2">
                   <span className="animate-spin inline-block h-4 w-4 border-2 border-gray-900 border-t-transparent rounded-full"></span>

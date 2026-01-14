@@ -142,8 +142,11 @@ export default function EventsPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {upcoming.map((event) => {
+                // Cloudinary URLs are already full URLs, so use directly if it starts with http
                 const imageUrl = event.cover_url 
-                  ? `${BACKEND_BASE_URL}${event.cover_url}` 
+                  ? (event.cover_url.startsWith('http://') || event.cover_url.startsWith('https://') 
+                      ? event.cover_url 
+                      : `${BACKEND_BASE_URL}${event.cover_url}`)
                   : null;
                 const hasImageError = imageErrors[event.id];
 
@@ -242,8 +245,11 @@ export default function EventsPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
               {past.map((event) => {
+                // Cloudinary URLs are already full URLs, so use directly if it starts with http
                 const imageUrl = event.cover_url 
-                  ? `${BACKEND_BASE_URL}${event.cover_url}` 
+                  ? (event.cover_url.startsWith('http://') || event.cover_url.startsWith('https://') 
+                      ? event.cover_url 
+                      : `${BACKEND_BASE_URL}${event.cover_url}`)
                   : null;
                 const hasImageError = imageErrors[event.id];
 

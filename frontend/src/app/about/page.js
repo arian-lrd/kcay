@@ -25,7 +25,7 @@ export default function AboutPage() {
     setMounted(true);
     async function fetchData() {
       try {
-        const aboutData = await getAbout();
+        const aboutData = await getAbout('about_us_full');
         setData(aboutData);
       } catch (err) {
         console.error('Error fetching about data:', err);

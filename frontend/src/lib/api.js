@@ -30,6 +30,7 @@ async function apiRequest(endpoint, options = {}) {
         'Content-Type': 'application/json',
         ...options.headers,
       },
+      cache: 'no-store', // Prevent browser caching
       ...options,
     });
 
@@ -55,7 +56,7 @@ async function apiRequest(endpoint, options = {}) {
     
     // Re-throw with original message if it exists
     if (error.message) {
-      throw error;
+    throw error;
     }
     
     // Fallback error message
@@ -69,10 +70,12 @@ async function apiRequest(endpoint, options = {}) {
 
 /**
  * Get about page data (team members with images and responsibilities)
+ * @param {string} contentType - 'about_us_summary' for homepage, 'about_us_full' for about page
  * @returns {Promise<Object>} About page data
  */
-export async function getAbout() {
-  return apiRequest('/about');
+export async function getAbout(contentType = 'about_us_summary') {
+  const queryString = contentType ? `?content=${encodeURIComponent(contentType)}` : '';
+  return apiRequest(`/about${queryString}`);
 }
 
 // ============================================================================
